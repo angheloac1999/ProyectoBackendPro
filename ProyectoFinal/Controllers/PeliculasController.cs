@@ -46,6 +46,23 @@ namespace ProyectoFinal.Controllers
         // GET: Peliculas/Create
         public IActionResult Create()
         {
+            var directores = _context.Directores
+                .Select(d => new SelectListItem
+                {
+                    Value = d.Id.ToString(),   // El valor será el Id del director
+                    Text = d.Nombre            // El texto será el nombre del director
+                }).ToList();
+
+            var generos = _context.Generos
+                .Select(g => new SelectListItem
+                {
+                    Value = g.Id.ToString(),   // El valor será el Id del director
+                    Text = g.Nombre            // El texto será el nombre del director
+                }).ToList();
+
+            ViewBag.IdGenero = generos;
+            ViewBag.IdDirector = directores;
+
             return View();
         }
 
@@ -62,6 +79,18 @@ namespace ProyectoFinal.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.IdDirector = _context.Directores
+                .Select(d => new SelectListItem
+                    {
+                        Value = d.Id.ToString(),
+                        Text = d.Nombre
+                    }).ToList();
+            ViewBag.IdGenero = _context.Generos
+                .Select(g => new SelectListItem
+                    {
+                        Value = g.Id.ToString(),
+                        Text = g.Nombre
+                    }).ToList();
             return View(pelicula);
         }
 
