@@ -73,6 +73,10 @@ namespace ProyectoFinal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Titulo,Sinopsis,Duracion,FechaEstreno,RutaImagen,IdGenero,IdDirector")] Pelicula pelicula)
         {
+            ModelState.Remove("Genero");
+            ModelState.Remove("Director");
+            ModelState.Remove("PeliculaActores");
+
             if (ModelState.IsValid)
             {
                 _context.Add(pelicula);

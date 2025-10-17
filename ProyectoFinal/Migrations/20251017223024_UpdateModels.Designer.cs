@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoFinal.Data;
 
@@ -11,9 +12,11 @@ using ProyectoFinal.Data;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251017223024_UpdateModels")]
+    partial class UpdateModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,11 +102,17 @@ namespace ProyectoFinal.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DirectorId")
+                        .HasColumnType("int");
+
                     b.Property<TimeSpan>("Duracion")
                         .HasColumnType("time");
 
                     b.Property<DateTime>("FechaEstreno")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("GeneroId")
+                        .HasColumnType("int");
 
                     b.Property<int>("IdDirector")
                         .HasColumnType("int");
@@ -125,9 +134,9 @@ namespace ProyectoFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdDirector");
+                    b.HasIndex("DirectorId");
 
-                    b.HasIndex("IdGenero");
+                    b.HasIndex("GeneroId");
 
                     b.ToTable("Peliculas");
                 });
@@ -165,13 +174,13 @@ namespace ProyectoFinal.Migrations
                 {
                     b.HasOne("ProyectoFinal.Models.Director", "Director")
                         .WithMany("Peliculas")
-                        .HasForeignKey("IdDirector")
+                        .HasForeignKey("DirectorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProyectoFinal.Models.Genero", "Genero")
                         .WithMany("Peliculas")
-                        .HasForeignKey("IdGenero")
+                        .HasForeignKey("GeneroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

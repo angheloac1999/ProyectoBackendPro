@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoFinal.Models
 {
@@ -22,8 +24,15 @@ namespace ProyectoFinal.Models
         [Display(Name = "Director")]
         public int IdDirector { get; set; }
 
+        [ForeignKey("IdGenero")]
+        [ValidateNever]
         public Genero Genero { get; set; }
+
+        [ForeignKey("IdDirector")]
+        [ValidateNever]
         public Director Director { get; set; }
+
+        [ValidateNever]
         public ICollection<PeliculaActor> PeliculaActores { get; set; } = new List<PeliculaActor>();
     }
 }
