@@ -1,0 +1,41 @@
+﻿@model IEnumerable<peliculasweb.Models.PeliculaActor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Película
+            </th>
+            <th>
+                Actor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Pelicula?.Titulo (@item.PeliculaId)
+            </td>
+            <td>
+                @item.Actor?.Nombre (@item.ActorId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { peliculaId = item.PeliculaId, actorId = item.ActorId }) |
+                @Html.ActionLink("Details", "Details", new { peliculaId = item.PeliculaId, actorId = item.ActorId }) |
+                @Html.ActionLink("Delete", "Delete", new { peliculaId = item.PeliculaId, actorId = item.ActorId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
