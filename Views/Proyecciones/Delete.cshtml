@@ -1,0 +1,54 @@
+﻿@model peliculasweb.Models.Proyeccion
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0"><i class="fas fa-trash"></i> Eliminar Proyección</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">¿Estás seguro de que quieres eliminar esto?</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.FechaInicio)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.FechaInicio)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.FechaFin)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.FechaFin)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Pelicula)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Model.Pelicula?.Titulo
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Cine)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Model.Cine?.Nombre
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-end">
+                    <form asp-action="Delete" class="d-inline">
+                        <input type="hidden" asp-for="Id" />
+                        <button type="submit" class="btn btn-danger me-2"><i class="fas fa-trash"></i> Eliminar</button>
+                    </form>
+                    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver a la
+                        Lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model peliculasweb.Models.PeliculaTrabajador
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0"><i class="fas fa-info-circle"></i> Detalles de Película-Trabajador</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Pelicula)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Model.Pelicula?.Titulo (@Model.PeliculaId)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Trabajador)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Model.Trabajador?.Nombre (@Model.TrabajadorId)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-end">
+                    <a asp-action="Edit" asp-route-peliculaId="@Model.PeliculaId"
+                        asp-route-trabajadorId="@Model.TrabajadorId" class="btn btn-warning me-2"><i
+                            class="fas fa-edit"></i> Editar</a>
+                    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver a la
+                        Lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
